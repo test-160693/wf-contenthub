@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "576f504a-a8f8-4b28-9795-3d24225d6a6c",
+		"name": "ECM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Tenant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "common",
+						"type": "default"
+					},
+					{
+						"key": "tenant",
+						"value": "test",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tenant_name\" : \"Supervisour\",\r\n    \"description\" : \"Test tenant\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/tenants",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tenants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"krishna\",\r\n    \"lastName\": \"sabbu\",\r\n    \"userName\": \"ksabbu\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"krishna.sabbu@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"krishna.sabbu@gmail1.com\",\r\n    \"password\": \"12345\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Groups",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/groups",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"groups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User Group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"content_authors\",\r\n    \"description\": \"Group is created for mainiting user roles\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/groups",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"groups"
+					],
+					"query": [
+						{
+							"key": "tenant_name",
+							"value": "Supervisour",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Role",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"organization1\",\r\n    \"description\": \"maintaing organization1 level \"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Roles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Role by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/roles/4",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Resources",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/resources",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"resources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Resource",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Group\",\r\n    \"description\": \"Resource is to add the Group\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/resources",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"resources"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Resource by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/resources/3",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"resources",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Permissions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Permission",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"View\",\r\n    \"description\": \"Permission are viewing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Permission By Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/permissions/2",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"permissions",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign Users to Roles",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_ids\" : [\r\n       2\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/roles/3/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles",
+						"3",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign permissions to roles",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resources\":[\r\n        {\r\n            \"name\" : \"Group\",\r\n            \"id\" : 2,\r\n            \"permissions\" : [\r\n                {\r\n                    \"name\" : \"View\",\r\n                    \"id\":2\r\n                }\r\n            ]\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/roles/3/permissions",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"roles",
+						"3",
+						"permissions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign users to Groups",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_ids\" :[\r\n        2\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/groups/2/users",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"groups",
+						"2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign roles to Groups",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "tenant_name",
+						"value": "Supervisour",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"role_ids\" :[\r\n        2\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/groups/2/roles",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"groups",
+						"2",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
