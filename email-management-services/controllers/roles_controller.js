@@ -10,7 +10,7 @@ const get_roles = ((req, res) => {
     .then(result => {
         res.status(200).json(result);
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 });
 
@@ -20,7 +20,7 @@ const get_role = ((req, res) => {
     .then(result => {
         res.status(200).json(result);
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 });
 
@@ -38,7 +38,7 @@ const create_role = ((req, res) => {
             .then(result => {
                 res.status(200).json(result);
             }).catch(error => {
-                res.status(500).json({ error: error.message });
+                res.status(500).json({ error: error });
             });
         }
     }).catch(error => {
@@ -57,7 +57,7 @@ const update_role = ((req, res) => {
     .then(result => {
         res.status(200).json(result);
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 })
 
@@ -67,7 +67,7 @@ const delete_role = ((req, res) => {
     .then(result => {
         res.status(200).json(result);
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 });
 
@@ -75,8 +75,9 @@ const assign_permissions = ((req, res) => {
     const role_id = req.params.id;
     role_service.get_role(role_id, req.tenant_name)
     .then(result => {
+        console.log("result ==== "+JSON.stringify(result));
         const resources = req.body.resources;
-        console.log("resources ==== "+resources);
+        console.log("resources ==== "+JSON.stringify(resources));
         const resource_ids = [];
         const permission_id = [];
         resources.forEach((resource) => {
@@ -91,25 +92,33 @@ const assign_permissions = ((req, res) => {
         const unique_permission_ids = [...new Set(permission_id)];
         resource_service.get_resources_by_ids(resource_ids, req.tenant_name)
         .then(resource_result => {
+            console.log(resource_result);
             if(resource_result.length === resource_ids.length) {
                 permission_service.get_permission_by_ids(unique_permission_ids, req.tenant_name)
                 .then(permission_result => {
                     if(permission_result.length === unique_permission_ids.length) {
+                        console.log(permission_result);
+
+                        console.log(result);
+
+                        console.log(resources);
+
                         result.resources = resources;
+                        
                         role_service.update_role(role_id, result, req.tenant_name)
                         .then(role_result => {
                             res.status(200).json({message: 'Role updated successfully'});
-                        }).catch(error => {res.status(500).json({ error: error.message }); });
+                        }).catch(error => {res.status(500).json({ error: error }); });
                     }else {
                         res.status(500).json({ error: 'permission ids are not matching with DB' });
                     }
-                }).catch(error => { res.status(500).json({ error: error.message }); })
+                }).catch(error => { res.status(500).json({ error: error }); })
             }else {
                 res.status(500).json({ error: 'resource ids are not matching with DB' });
             }
-        }).catch(error => { res.status(500).json({ error: error.message }); });
+        }).catch(error => { res.status(500).json({ error: error }); });
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 });
 
@@ -126,11 +135,11 @@ const assign_users = ((req, res) => {
                 .then(role_user_result => {
                     assign_roles_users(role_id, user_result, req.tenant_name);
                     res.status(200).json(result);
-                }).catch(error => res.status(500).json({ error: error.message }));
+                }).catch(error => res.status(500).json({ error: error }));
             }
-        }).catch(error => res.status(500).json({ error: error.message }));
+        }).catch(error => res.status(500).json({ error: error }));
     }).catch(error => {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error });
     });
 });
 

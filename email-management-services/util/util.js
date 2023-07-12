@@ -52,7 +52,7 @@ const get_resources = () => {
     const resources_path =  get_value('resources.name').split(",");
     const resources = [];
     resources_path.forEach(element => {
-        var resource = {};
+        const resource = {};
         resource.name = element;
         resource.description = element;
         resource.status = 'Active';
@@ -66,7 +66,7 @@ const get_permissions = () => {
     const permissions_path =  get_value('permissions.name').split(",");
     const permissions = [];
     permissions_path.forEach(element => {
-        var permission = {};
+        const permission = {};
         permission.name = element;
         permission.description = element;
         permission.status = 'Active';
@@ -103,6 +103,7 @@ const create_folder = (folder_name) => {
         const folder = db_path + folder_name;
         console.log("folder === "+folder);
         if (!fs.existsSync(folder)) {  
+            console.log("folder === "+folder);
             fs.mkdir(folder, (err) => {
                 if (err) {
                     console.error(err);

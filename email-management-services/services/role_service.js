@@ -48,7 +48,11 @@ function get_role(id, tenant_name) {
             if (err) {
                 reject('Failed to retrieve role');
             } else {
-                resolve(role);
+                if(role != null) {
+                    resolve(role);
+                }else {
+                    reject('role not exist for id : '+id);
+                }
             }
         });
     });
