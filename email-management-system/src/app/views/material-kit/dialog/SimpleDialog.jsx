@@ -61,7 +61,7 @@ SimpleDialog.propTypes = {
 };
 
 export default function SimpleDialogDemo() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [selectedValue, setSelectedValue] = useState('user02@gmail.com');
 
   const handleClickOpen = () => setOpen(true);

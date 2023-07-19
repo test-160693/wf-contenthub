@@ -37,18 +37,22 @@ const create_user_group = ((req, res) => {
 });
 
 const update_user_group = ((req, res) => {
-    var user_group = {};
-    user_group.name = req.body.name;
-    user_group.description = req.body.description;
-    user_group.status = req.body.status;
     const id = req.params.id;
-    user_group_service.update_user_group(id, user_group, req.tenant_name)
-    .then(result => {
-        res.status(200).json(result);
+    user_group_service.get_user_group(id, req.tenant_name)
+    .then(user_group => {
+        user_group.name = req.body.name;
+        user_group.description = req.body.description;
+        user_group.status = req.body.status;
+        user_group_service.update_user_group(id, user_group, req.tenant_name)
+        .then(result => {
+            res.status(200).json(result);
+        }).catch(error => {
+            res.status(500).json({ error: error.message });
+        });
     }).catch(error => {
         res.status(500).json({ error: error.message });
-    });
-})
+    }); 
+});
 
 const delete_user_group = ((req, res) => {
     const id = req.params.id;

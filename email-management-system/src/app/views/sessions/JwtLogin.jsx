@@ -4,9 +4,11 @@ import { Box, styled, useTheme } from '@mui/material';
 import { Paragraph } from 'app/components/Typography';
 import useAuth from 'app/hooks/useAuth';
 import { Formik } from 'formik';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import Autocomplete from '@mui/material/Autocomplete';
+import axios from 'axios';
 
 const FlexBox = styled(Box)(() => ({ display: 'flex', alignItems: 'center' }));
 
@@ -34,15 +36,15 @@ const JWTRoot = styled(JustifyBox)(() => ({
 
 // inital login credentials
 const initialValues = {
-  email: 'jason@ui-lib.com',
-  password: 'dummyPass',
+  email: 'krishna.sabbu@gmail.com',
+  password: '12345',
   remember: true
 };
 
 // form field validation schema
 const validationSchema = Yup.object().shape({
   password: Yup.string()
-    .min(6, 'Password must be 6 character length')
+    .min(5, 'Password must be 5 character length')
     .required('Password is required!'),
   email: Yup.string().email('Invalid Email address').required('Email is required!')
 });
@@ -51,18 +53,50 @@ const JwtLogin = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [value, setValue] = useState({ label: 'Supervisour' });
+  const [tenants, setTenant] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const tenant  = await axios.get('http://localhost:4000/api/tenants');
+        const tenantsT = [];
+        if(tenant.data) {
+          tenant.data.map((tenantT) => {
+             const arr = {};
+             arr.label = tenantT.tenant_name;
+             tenantsT.push(arr);
+          });
+        }
+        setTenant(tenantsT);
+        console.log(tenant.data);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
+
+  const handleAutoChange = (_, newValue) => {
+    if (newValue && newValue.inputValue) {
+      setValue({ label: newValue.inputValue });
+      return;
+    }
+    setValue(newValue);
+  };
+
 
   const { login } = useAuth();
 
   const handleFormSubmit = async (values) => {
     setLoading(true);
     try {
-      await login(values.email, values.password);
+      await login(value.label, values.email, values.password);
       navigate('/');
     } catch (e) {
       setLoading(false);
     }
   };
+
 
   return (
     <JWTRoot>
@@ -83,6 +117,24 @@ const JwtLogin = () => {
               >
                 {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => (
                   <form onSubmit={handleSubmit}>
+
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      variant="outlined"
+                      name="tenant"
+                      value={value}
+                      onBlur={handleBlur}
+                      onChange={handleAutoChange}
+                      options={tenants}
+                      sx={{ mb: 3 }}
+                      renderInput={(params) => 
+                        <TextField {...params} 
+                        label="Tenant"
+                        />
+                      }
+                    />
+
                     <TextField
                       fullWidth
                       size="small"

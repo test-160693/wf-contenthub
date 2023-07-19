@@ -171,7 +171,8 @@ const RowCards = () => {
     <MaterialReactTable
       columns={columns}
       data={data}
-      enableColumnFilters={false} 
+      enableColumnFilters={true}
+      enableColumnActions={true}
     />
   );
 };

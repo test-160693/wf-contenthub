@@ -70,6 +70,7 @@ function createUser(user, tenant_name) {
 };
   
 function loginUser(email, password, tenant_name) {
+    console.log("tenant_name ==== "+tenant_name);
     const collection = util.get_user_collection(tenant_name);
     return new Promise((resolve, reject) => {
         collection.findOne({ email, password }, (err, user) => {

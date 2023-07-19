@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import { ECMLoading } from 'app/components';
+import urls from '../urls';
 
 const initialState = {
   user: null,
@@ -27,6 +28,7 @@ const initialState = {
 // };
 
 const reducer = (state, action) => {
+  console.log("action type === "+action.type);
   switch (action.type) {
     case 'INIT': {
       const { isAuthenticated, user } = action.payload;
@@ -64,10 +66,13 @@ const AuthContext = createContext({
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   console.log("children === "+children);
-  const login = async (email, password) => {
-    const response = await axios.post('/api/auth/login', { email, password });
-    const { user } = response.data;
-
+  const login = async (tenant, email, password) => {
+    const headers = {
+      'tenant_name': tenant
+    };
+    const response = await axios.post(urls.HOST_URL+'/api/users/login', { email, password }, {headers});
+    const user = response.data;
+    localStorage.setItem('tenant_name', tenant);
     dispatch({ type: 'LOGIN', payload: { user } });
   };
 
@@ -89,16 +94,6 @@ export const AuthProvider = ({ children }) => {
         dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: data.user } });
       } catch (err) {
         console.error(err);
-        const userTemp = {
-          id: 1,
-          role: 'SA',
-          name: 'Krishna Sabbu',
-          username: 'ksabbu',
-          email: 'ksabbu@gmail.com',
-          avatar: '/assets/images/sabbu.jpg',
-          age: 25
-        }
-        dispatch({ type: 'INIT', payload: { isAuthenticated: true, user: userTemp } });
       }
     })();
   }, []);

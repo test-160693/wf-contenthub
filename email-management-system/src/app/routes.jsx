@@ -18,6 +18,8 @@ const AppEchart = Loadable(lazy(() => import('app/views/charts/echarts/AppEchart
 // dashboard page
 const Analytics = Loadable(lazy(() => import('app/views/dashboard/Analytics')));
 
+const Groups = Loadable(lazy(() => import('app/views/admin/Groups')));
+
 const routes = [
   {
     element: (
@@ -31,6 +33,12 @@ const routes = [
       {
         path: '/dashboard/default',
         element: <Analytics />,
+        auth: authRoles.admin
+      },
+
+      {
+        path: '/admin/groups',
+        element: <Groups />,
         auth: authRoles.admin
       },
 

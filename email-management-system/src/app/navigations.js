@@ -43,5 +43,17 @@ export const navigations = [
     icon: 'launch',
     type: 'extLink',
     path: 'http://demos.ui-lib.com/matx-react-doc/'
+  },
+  {
+    name: 'Documentation',
+    icon: 'launch',
+    type: 'extLink',
+    path: 'http://demos.ui-lib.com/matx-react-doc/'
+  },
+  {
+    name: 'Group',
+    icon: 'group',
+    path: '/admin/groups'
   }
+  
 ];

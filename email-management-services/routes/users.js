@@ -26,6 +26,6 @@ router.put('/:id', validate_tenant, updateUser)
 
 router.delete('/:id', validate_tenant, deleteUser)
 
-router.post('/login', loginUser)
+router.post('/login', validate_tenant, loginUser)
 
 module.exports = router

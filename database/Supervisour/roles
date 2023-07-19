@@ -1,3 +1,6 @@
 {"k":"0000000078","o":"0000000117","v":"001"}
 {"_id":2,"_uid":2,"_dt":1689143598599,"_s":"c01c4a3786ce72aa6cb1b02e69e32cac"}
 {"name":"organization","description":"maintaing organization1 level ","status":"Active","_id":{"$wrap":"$oid","v":2}}
+{"k":"0000000078","o":"0000000194","v":"001"}
+{"_id":2,"_uid":2,"_dt":1689145111401,"_s":"7540175e086cc8e2c2dc8b2d38837241"}
+{"name":"organization","description":"maintaing organization1 level ","status":"Active","_id":{"$wrap":"$oid","v":2},"resources":[{"name":"Group","id":2,"permissions":[{"name":"View","id":2}]}]}

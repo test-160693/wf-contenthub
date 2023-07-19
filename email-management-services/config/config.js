@@ -15,6 +15,7 @@ module.exports.config = () => {
     const rules_routes = require('../routes/rules.js');
     const configuration_routes = require('../routes/configuration.js');
     const content_routes = require('../routes/content.js');
+    const cors = require('cors');
 
     start.onstartup('Administrator', 'Administrator tenant');
 
@@ -44,11 +45,24 @@ module.exports.config = () => {
         files: ['../routes/*.js'] //Path to the API handle folder
     };
     expressSwagger(options);
-    app.listen(3000, () => {
-        console.log('server is listening on port 3000')
+
+
+    app.use((req, res, next) => {
+        const originalJson = res.json;
+        res.json = function (data) {
+            res.set('tenant_name', req.tenant_name);
+            originalJson.call(this, data);
+        };
+        next();
+    });
+
+
+    app.listen(4000, () => {
+        console.log('server is listening on port 4000')
     })
 
     app.use(express.json());
+    app.use(cors());
     app.use(bodyParser.json());
     app.use('/api/users', users_routes);
     app.use('/api/tenants', tenants_routes);
