@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tree View with Categories and Branches</title>
+</head>
+<body>
+  <div style="display: flex; flex-direction: column; align-items: center;">
+    <!-- Category Node -->
+    <div style="position: relative;width: 100px;height: 50px;background-color: rgba(255, 99, 71, 0.8);border-radius: 10px;display: flex;justify-content: center;align-items: center;color: #fff;cursor: pointer;">
+      Category
+      <!-- Branch Connector Lines -->
+      <div style="position: absolute; top: 50px; left: 50px; width: 2px; height: 20px; background-color: #ccc;"></div>
+      
+      
+      <!-- Cross Lines -->
+      <div style="position: absolute; top: 50px; left: 65px; width: 70px; height: 2px; background-color: #ccc; transform: rotate(45deg);z-index:-1;"></div>
+      <div style="position: absolute; top: 55px; left: -30px; width: 50px; height: 2px; background-color: #ccc; transform: rotate(-45deg);z-index:-1;"></div>
+    </div>
+
+    <!-- Branches -->
+    <div style="display: flex; gap: 20px; margin-top: 20px;">
+      <!-- Branch A -->
+      <div style="position: relative;">
+        <div style="width: 100px; height: 50px; background-color: rgba(255, 99, 71, 0.8); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer;">
+          A
+        </div>
+        <!-- Branch Connector Line -->
+        
+      </div>
+
+      <!-- Branch B -->
+      <div style="position: relative;">
+        <div style="width: 100px; height: 50px; background-color: rgba(255, 99, 71, 0.8); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer;">
+          B
+        </div>
+        <!-- Branch Connector Line -->
+        <div style="position: absolute; top: -20px; left: 50px; width: 2px; height: 20px; background-color: #ccc;"></div>
+      </div>
+
+      <!-- Branch C -->
+      <div style="position: relative;">
+        <div style="width: 100px; height: 50px; background-color: rgba(255, 99, 71, 0.8); border-radius: 10px; display: flex; justify-content: center; align-items: center; color: #fff; cursor: pointer;">
+          C
+        </div>
+        <!-- Branch Connector Line -->
+        
+      </div>
+    </div>
+  </div>
+</body>
+</html>
